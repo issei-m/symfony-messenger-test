@@ -6,11 +6,12 @@ namespace App\MessageHandler;
 
 use App\Message\TestMessage;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 /**
  * @author Issei Murasawa <issei.m7@gmail.com>
  */
-class TestMessageHandler
+class TestMessageHandler implements MessageHandlerInterface
 {
     /**
      * @var LoggerInterface
