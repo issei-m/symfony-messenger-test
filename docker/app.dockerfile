@@ -19,4 +19,6 @@ RUN { \
   echo 'xdebug.remote_host = docker.for.mac.localhost'; \
 } > /usr/local/etc/php/conf.d/overrides.ini
 
-COPY . /var/www/php
+COPY . /app
+
+WORKDIR /app

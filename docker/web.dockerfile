@@ -2,8 +2,8 @@ FROM nginx:1.16.0-alpine
 
 RUN { \
     echo 'server {'; \
-    echo '  server_name domain.tld www.domain.tld;'; \
-    echo '  root /var/www/html/public;'; \
+    echo '  server_name local.app.example.com;'; \
+    echo '  root /app/public;'; \
     echo '  location / {'; \
     echo '      try_files $uri /index.php$is_args$args;'; \
     echo '  }'; \
@@ -21,3 +21,5 @@ RUN { \
     echo '  }'; \
     echo '}'; \
 } > /etc/nginx/conf.d/app.conf
+
+WORKDIR /app

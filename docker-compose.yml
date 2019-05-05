@@ -5,16 +5,19 @@ services:
     build:
       context: .
       dockerfile: docker/app.dockerfile
-
     volumes:
-      - '.:/var/www/html:rw,cached'
+      - '.:/app:rw,cached'
+
   web:
     build:
       context: .
       dockerfile: docker/web.dockerfile
     volumes:
-      - './public:/var/www/html/public'
+      - './public:/app/public'
     ports:
       - '80:80'
     depends_on:
       - app
+
+volumes:
+  app_public:
