@@ -16,7 +16,8 @@ RUN apk --no-cache add \
         intl \
         mbstring \
         pdo_mysql \
-        opcache
+        opcache \
+        pcntl
 
 # amqp
 RUN apk --no-cache add \
