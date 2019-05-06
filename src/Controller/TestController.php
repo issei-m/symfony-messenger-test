@@ -20,7 +20,12 @@ class TestController extends AbstractController
      */
     public function enqueue(MessageBusInterface $bus): Response
     {
-        $bus->dispatch(new TestMessage('Issei.M'));
+        $bus->dispatch((function () {
+            $msg = new TestMessage();
+            $msg->senderName = 'Issei.M';
+
+            return $msg;
+        })());
 
         return $this->json(['status' => 'ok']);
     }

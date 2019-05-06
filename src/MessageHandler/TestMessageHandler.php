@@ -28,7 +28,10 @@ class TestMessageHandler implements MessageHandlerInterface
         $this->logger->info('Hi!, ' . $message->senderName);
         $this->logger->info('Start!');
 
-        \sleep(5);
+        for ($i = 5; $i > 0; $i--) {
+            $this->logger->info('...' . (string) $i);
+            \sleep(1);
+        }
 
         $this->logger->info('Complete!');
     }

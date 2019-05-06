@@ -13,9 +13,4 @@ class TestMessage
      * @var string
      */
     public $senderName;
-
-    public function __construct(string $yourName)
-    {
-        $this->senderName = $yourName;
-    }
 }
