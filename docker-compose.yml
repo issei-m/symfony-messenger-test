@@ -25,6 +25,8 @@ services:
   batch:
     image: symfony-messenger-test_app
     command: ['bin/console', 'messenger:consume-messages', 'amqp']
+    init: true
+    stop_signal: SIGTERM
     volumes:
       - '.:/app:rw,delegated'
     depends_on:
