@@ -21,3 +21,11 @@ services:
 
   queue:
     image: rabbitmq:3.7
+
+  batch:
+    image: symfony-messenger-test_app
+    command: ['bin/console', 'messenger:consume-messages', 'amqp']
+    volumes:
+      - '.:/app:rw,delegated'
+    depends_on:
+      - queue
