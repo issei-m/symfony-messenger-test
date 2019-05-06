@@ -19,5 +19,5 @@ services:
     depends_on:
       - app
 
-volumes:
-  app_public:
+  queue:
+    image: rabbitmq:3.7

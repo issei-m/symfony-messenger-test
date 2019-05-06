@@ -1,14 +1,29 @@
 FROM php:7.3-fpm-alpine3.9
 
-RUN apk upgrade --update && apk --no-cache add \
-    # iconv, intl
-    icu-dev \
-    # xdebug
-    autoconf make g++ gcc
+RUN apk upgrade --update
 
-RUN docker-php-ext-install -j$(nproc) iconv intl mbstring pdo_mysql opcache && \
-  pecl install xdebug-2.7.1 && \
-  docker-php-ext-enable xdebug
+# xdebug
+RUN apk --no-cache add \
+    autoconf make g++ gcc \
+    && pecl install xdebug-2.7.1 \
+    && docker-php-ext-enable xdebug
+
+# iconv, intl, any other needed
+RUN apk --no-cache add \
+    icu-dev \
+    && docker-php-ext-install -j$(nproc) \
+        iconv \
+        intl \
+        mbstring \
+        pdo_mysql \
+        opcache
+
+# amqp
+RUN apk --no-cache add \
+    rabbitmq-c \
+    rabbitmq-c-dev \
+    && pecl install amqp-1.9.4 \
+    && docker-php-ext-enable amqp
 
 RUN { \
   echo 'opcache.max_accelerated_files = 20000'; \
