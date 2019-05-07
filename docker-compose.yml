@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: docker/app.dockerfile
+      target: app-develop-fpm
     volumes:
       - '.:/app:rw,delegated'
 
@@ -21,3 +22,15 @@ services:
 
   queue:
     image: rabbitmq:3.7
+
+  batch:
+    build:
+      context: .
+      dockerfile: docker/app.dockerfile
+      target: app-develop
+    command: ['bin/console', 'messenger:consume-messages', 'amqp']
+    init: true
+    volumes:
+      - '.:/app:rw,delegated'
+    depends_on:
+      - queue
